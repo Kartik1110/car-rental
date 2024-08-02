@@ -1,7 +1,7 @@
 import CustomButton from "./CustomButton";
 import Loader from "./Loader";
 // import VideoCard from "./VideoCard";
-// import FormField from "./FormField";
+import FormField from "./FormField";
 // import InfoBox from "./InfoBox";
 // import Trending from "./Trending";
 // import SearchInput from "./SearchInput";
@@ -10,8 +10,8 @@ import Loader from "./Loader";
 export {
   CustomButton,
   Loader,
+  FormField,
   //   VideoCard,
-  //   FormField,
   //   InfoBox,
   //   Trending,
   //   SearchInput,
