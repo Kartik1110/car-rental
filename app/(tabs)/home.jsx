@@ -1,22 +1,24 @@
 import { useState } from "react";
-import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
-
-import { images } from "../../constants";
-// import { createUser } from "../../lib/appwrite";
+import { View, ScrollView, Dimensions } from "react-native";
 import { CustomButton, FormField } from "../../components";
-// import { useGlobalContext } from "../../context/GlobalProvider";
 
-const SignUp = () => {
-  //   const { setUser, setIsLogged } = useGlobalContext();
-
+const Home = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: "",
     email: "",
-    password: "",
   });
+  // const { data: posts, refetch } = useAppwrite(getAllPosts);
+  // const { data: latestPosts } = useAppwrite(getLatestPosts);
+
+  // const [refreshing, setRefreshing] = useState(false);
+
+  // const onRefresh = async () => {
+  //   setRefreshing(true);
+  //   await refetch();
+  //   setRefreshing(false);
+  // };
 
   const submit = async () => {
     // if (form.username === "" || form.email === "" || form.password === "") {
@@ -36,51 +38,34 @@ const SignUp = () => {
   };
 
   return (
-    <SafeAreaView className="bg-biege h-full">
+    <SafeAreaView className="bg-biege h-full p-4">
       <ScrollView>
         <View
-          className="w-full flex justify-center h-full px-4 my-6"
+          // className="w-full flex justify-center h-full px-4 my-6"
           style={{
             minHeight: Dimensions.get("window").height - 150,
           }}
         >
-          {/* <Image
-            source={images.logo}
-            resizeMode="contain"
-            className="w-[115px] h-[60px]"
-          /> */}
-
-          <Text className="text-2xl font-semibold text-primary mt-10 font-psemibold">Sign Up to Autobreeze</Text>
-
           <FormField
-            title="Email"
+            title="Car Owner Name"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             keyboardType="email-address"
-            placeholder={"Enter your email"}
           />
 
           <FormField
-            title="Password"
+            title="Car Type"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
-            placeholder={"Enter your password"}
           />
 
-          <CustomButton title="Sign Up" handlePress={submit} containerStyles="mt-7" isLoading={isSubmitting} />
-
-          <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-primary font-pregular">Have an account already?</Text>
-            <Link href="(auth)/sign-in" className="text-lg font-psemibold text-secondary">
-              Login
-            </Link>
-          </View>
+          <CustomButton title="Submit" handlePress={submit} containerStyles="mt-7" isLoading={isSubmitting} />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default SignUp;
+export default Home;

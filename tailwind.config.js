@@ -18,6 +18,7 @@ module.exports = {
         gray: {
           100: "#CDCDE0",
         },
+        biege: "#FAF0E6"
       },
       fontFamily: {
         pthin: ["Poppins-Thin", "sans-serif"],

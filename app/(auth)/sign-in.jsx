@@ -9,7 +9,7 @@ import { CustomButton, FormField } from "../../components";
 // import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
-//   const { setUser, setIsLogged } = useGlobalContext();
+  //   const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -17,29 +17,26 @@ const SignIn = () => {
   });
 
   const submit = async () => {
-//     if (form.email === "" || form.password === "") {
-//       Alert.alert("Error", "Please fill in all fields");
-//     }
-
-//     setSubmitting(true);
-
-//     try {
-//       await signIn(form.email, form.password);
-//       const result = await getCurrentUser();
-//       setUser(result);
-//       setIsLogged(true);
-
-//       Alert.alert("Success", "User signed in successfully");
-//       router.replace("/home");
-//     } catch (error) {
-//       Alert.alert("Error", error.message);
-//     } finally {
-//       setSubmitting(false);
-//     }
+    //     if (form.email === "" || form.password === "") {
+    //       Alert.alert("Error", "Please fill in all fields");
+    //     }
+    //     setSubmitting(true);
+    //     try {
+    //       await signIn(form.email, form.password);
+    //       const result = await getCurrentUser();
+    //       setUser(result);
+    //       setIsLogged(true);
+    //       Alert.alert("Success", "User signed in successfully");
+    //       router.replace("/home");
+    //     } catch (error) {
+    //       Alert.alert("Error", error.message);
+    //     } finally {
+    //       setSubmitting(false);
+    //     }
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-biege h-full">
       <ScrollView>
         <View
           className="w-full flex justify-center h-full px-4 my-6"
@@ -47,15 +44,13 @@ const SignIn = () => {
             minHeight: Dimensions.get("window").height - 150,
           }}
         >
-          <Image
+          {/* <Image
             source={images.logo}
             resizeMode="contain"
             className="w-[115px] h-[60px]"
-          />
+          /> */}
 
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Log in to Autobreeze
-          </Text>
+          <Text className="text-2xl font-semibold text-primary mt-10 font-psemibold">Log in to Autobreeze</Text>
 
           <FormField
             title="Email"
@@ -63,6 +58,7 @@ const SignIn = () => {
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             keyboardType="email-address"
+            placeholder={"Enter your email"}
           />
 
           <FormField
@@ -70,23 +66,14 @@ const SignIn = () => {
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
+            placeholder={"Enter your password"}
           />
 
-          <CustomButton
-            title="Sign In"
-            handlePress={submit}
-            containerStyles="mt-7"
-            isLoading={isSubmitting}
-          />
+          <CustomButton title="Sign In" handlePress={submit} containerStyles="mt-7" isLoading={isSubmitting} />
 
           <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
-              Don't have an account?
-            </Text>
-            <Link
-              href="/sign-up"
-              className="text-lg font-psemibold text-secondary"
-            >
+            <Text className="text-lg text-primary font-pregular">Don't have an account?</Text>
+            <Link href="/sign-up" className="text-lg font-psemibold text-secondary">
               Signup
             </Link>
           </View>
