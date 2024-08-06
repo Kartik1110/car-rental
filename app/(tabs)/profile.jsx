@@ -1,8 +1,12 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { Dimensions, ScrollView, SafeAreaView } from "react-native";
+import { View, Dimensions, ScrollView, SafeAreaView } from "react-native";
+import { router } from "expo-router";
+import { CustomButton } from "../../components";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import { signOut } from "../../lib/appwrite";
 
 const Profile = () => {
+  const { user, setUser, setIsLogged } = useGlobalContext();
+
   return (
     <SafeAreaView className="bg-biege h-full p-4">
       <ScrollView>
@@ -12,7 +16,19 @@ const Profile = () => {
             minHeight: Dimensions.get("window").height - 150,
           }}
         >
-          <Text className="text-primary text-2xl">Profile Page coming soon!!</Text>
+          <CustomButton
+            title="Sign Out"
+            handlePress={async () => {
+              await signOut();
+              setUser(null);
+              setIsLogged(false);
+
+              router.replace("/sign-in");
+            }}
+            otherStyles="mt-7"
+          >
+            Sign Out
+          </CustomButton>
         </View>
       </ScrollView>
     </SafeAreaView>

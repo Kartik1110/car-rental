@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, ScrollView, Dimensions } from "react-native";
-import { CustomButton, FormField } from "../../components";
+import { View, ScrollView, Dimensions, Text } from "react-native";
+import { CustomButton, FormField, SearchInput } from "../../components";
 
 const Home = () => {
   const [isSubmitting, setSubmitting] = useState(false);
@@ -38,30 +38,16 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView className="bg-biege h-full p-4">
+    <SafeAreaView className="bg-biege h-full">
       <ScrollView>
-        <View
-          // className="w-full flex justify-center h-full px-4 my-6"
-          style={{
-            minHeight: Dimensions.get("window").height - 150,
-          }}
-        >
-          <FormField
-            title="Car Owner Name"
-            value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherStyles="mt-7"
-            keyboardType="email-address"
-          />
-
-          <FormField
-            title="Car Type"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherStyles="mt-7"
-          />
-
-          <CustomButton title="Submit" handlePress={submit} containerStyles="mt-7" isLoading={isSubmitting} />
+        <View className="flex my-6 px-4 space-y-6">
+          <View className="flex justify-between items-start flex-row mb-6">
+            <View>
+              <Text className="font-pmedium text-sm text-primary">Welcome to</Text>
+              <Text className="text-2xl font-psemibold text-primary">Autobreeze</Text>
+            </View>
+          </View>
+          <SearchInput />
         </View>
       </ScrollView>
     </SafeAreaView>
