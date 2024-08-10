@@ -43,11 +43,11 @@ const Welcome = () => {
             containerStyles="w-full mt-7"
           />
 
-          <CustomButton
+          {/* <CustomButton
             title="Tabs"
             handlePress={() => router.push("/home")}
             containerStyles="w-full mt-7"
-          />
+          /> */}
         </View>
       </ScrollView>
 

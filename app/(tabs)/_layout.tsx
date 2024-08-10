@@ -4,7 +4,7 @@ import { Image, Text, View } from "react-native";
 
 import { icons } from "../../constants";
 import { Loader } from "../../components";
-// import { useGlobalContext } from "../../context/GlobalProvider";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
@@ -26,9 +26,9 @@ const TabIcon = ({ icon, color, name, focused }) => {
 };
 
 const TabLayout = () => {
-//   const { loading, isLogged } = useGlobalContext();
+  const { loading, isLogged } = useGlobalContext();
 
-//   if (!loading && !isLogged) return <Redirect href="/sign-in" />;
+  if (!loading && !isLogged) return <Redirect href="/sign-in" />;
 
   return (
     <>
@@ -60,21 +60,21 @@ const TabLayout = () => {
             ),
           }}
         />
-        {/* <Tabs.Screen
-          name="bookmark"
+        <Tabs.Screen
+          name="clients"
           options={{
-            title: "Bookmark",
+            title: "Clients",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.bookmark}
+                icon={icons.clients}
                 color={color}
-                name="Bookmark"
+                name="Clients"
                 focused={focused}
               />
             ),
           }}
-        /> */}
+        />
 
         <Tabs.Screen
           name="create"
@@ -108,7 +108,7 @@ const TabLayout = () => {
         />
       </Tabs>
 
-      {/* <Loader isLoading={loading} /> */}
+      <Loader isLoading={loading} />
       <StatusBar backgroundColor="#161622" style="light" />
     </>
   );
