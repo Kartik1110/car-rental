@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, FlatList, RefreshControl } from "react-native";
-import { CarCard, EmptyState } from "../../components";
+import { CarCard, EmptyState, Loader } from "../../components";
 import { getAllCars } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
 
 const Home = () => {
-  const { data, refetch } = useAppwrite(getAllCars);
+  const { data, refetch, loading } = useAppwrite(getAllCars);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
@@ -14,6 +14,10 @@ const Home = () => {
     await refetch();
     setRefreshing(false);
   };
+
+  if (loading) {
+    return <Loader isLoading={loading} />;
+  }
 
   return (
     <SafeAreaView className="bg-biege h-full">

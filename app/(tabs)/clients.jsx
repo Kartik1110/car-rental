@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { SafeAreaView, View, FlatList, RefreshControl } from "react-native";
-import { ClientCard, SearchInput, EmptyState } from "../../components";
+import { ClientCard, SearchInput, EmptyState, Loader } from "../../components";
 import useAppwrite from "../../lib/useAppwrite";
 import { getAllClients } from "../../lib/appwrite";
 
 const Clients = () => {
-  const { data, refetch } = useAppwrite(getAllClients);
+  const { data, refetch, loading } = useAppwrite(getAllClients);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
@@ -13,6 +13,10 @@ const Clients = () => {
     await refetch();
     setRefreshing(false);
   };
+
+  if (loading) {
+    return <Loader isLoading={loading} />;
+  }
 
   return (
     <SafeAreaView className="bg-biege h-full mt-5">
