@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { icons } from "../constants";
 
-const CarCard = ({ title, creator, avatar, thumbnail }) => {
+const CarCard = ({ title, number, avatar, thumbnail }) => {
 
   return (
     <View className="flex flex-col items-center px-4 my-4">
@@ -16,14 +16,14 @@ const CarCard = ({ title, creator, avatar, thumbnail }) => {
               {title}
             </Text>
             <Text className="text-xs text-secondary-200 font-pregular" numberOfLines={1}>
-              {creator}
+              {number}
             </Text>
           </View>
         </View>
 
-        <View className="pt-2">
+        {/* <View className="pt-2">
           <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
-        </View>
+        </View> */}
       </View>
 
       <TouchableOpacity

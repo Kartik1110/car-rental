@@ -1,60 +1,27 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, FlatList } from "react-native";
-import { useGlobalContext } from "../../context/GlobalProvider";
+import { View, Text, FlatList, RefreshControl } from "react-native";
 import { CarCard, EmptyState } from "../../components";
+import { getAllCars } from "../../lib/appwrite";
+import useAppwrite from "../../lib/useAppwrite";
 
 const Home = () => {
-  const { user, setUser, setIsLogged } = useGlobalContext();
-  const [isSubmitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-  });
-  // const { data: posts, refetch } = useAppwrite(getAllPosts);
-  // const { data: latestPosts } = useAppwrite(getLatestPosts);
+  const { data, refetch } = useAppwrite(getAllCars);
+  const [refreshing, setRefreshing] = useState(false);
 
-  // const [refreshing, setRefreshing] = useState(false);
-
-  // const onRefresh = async () => {
-  //   setRefreshing(true);
-  //   await refetch();
-  //   setRefreshing(false);
-  // };
-
-  const submit = async () => {
-    // if (form.username === "" || form.email === "" || form.password === "") {
-    //   Alert.alert("Error", "Please fill in all fields");
-    // }
-    // setSubmitting(true);
-    // try {
-    //   const result = await createUser(form.email, form.password, form.username);
-    //   setUser(result);
-    //   setIsLogged(true);
-    //   router.replace("/home");
-    // } catch (error) {
-    //   Alert.alert("Error", error.message);
-    // } finally {
-    //   setSubmitting(false);
-    // }
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
   };
 
   return (
     <SafeAreaView className="bg-biege h-full">
       <FlatList
-        data={[1, 2, 3, 4, 5]}
+        data={data}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <CarCard
-            title={"BMW M5"}
-            thumbnail={
-              "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            }
-            creator={"BMW"}
-            avatar={
-              "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            }
-          />
+          <CarCard title={item.name} thumbnail={item.imageUrl} number={item.number} avatar={item.imageUrl} />
         )}
         ListHeaderComponent={() => (
           <View className="flex my-6 px-4">
@@ -68,7 +35,7 @@ const Home = () => {
           </View>
         )}
         ListEmptyComponent={() => <EmptyState title="No Cars Found" subtitle="No Cars added yet" />}
-        // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
     </SafeAreaView>
   );

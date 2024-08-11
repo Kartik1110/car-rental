@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { router } from "expo-router";
 
-const ClientCard = ({ id, title, creator, avatar }) => {
+const ClientCard = ({ id, name, phone, avatar }) => {
   const handleViewInfo = () => {
     router.push(`/client/${id}`);
   };
@@ -17,10 +17,10 @@ const ClientCard = ({ id, title, creator, avatar }) => {
 
             <View className="flex justify-center flex-1 ml-3 gap-y-1">
               <Text className="font-psemibold text-sm text-primary" numberOfLines={1}>
-                {title}
+                {name}
               </Text>
               <Text className="text-xs text-secondary-200 font-pregular" numberOfLines={1}>
-                {creator}
+                {phone}
               </Text>
             </View>
           </View>
