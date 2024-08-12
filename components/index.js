@@ -7,5 +7,6 @@ import EmptyState from "./EmptyState";
 import CarCard from "./CarCard";
 import ClientCard from "./ClientCard";
 import InfoBox from "./InfoBox";
+import Dropdown from "./Dropdown";
 
-export { CustomButton, Loader, FormField, DatePicker, SearchInput, CarCard, EmptyState, ClientCard, InfoBox };
+export { CustomButton, Loader, FormField, DatePicker, SearchInput, CarCard, EmptyState, ClientCard, InfoBox, Dropdown };
