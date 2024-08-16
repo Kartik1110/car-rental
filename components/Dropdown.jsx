@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 
-const Dropdown = ({ title, options, otherStyles }) => {
+const Dropdown = ({ title, options, otherStyles, handleChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -10,6 +10,7 @@ const Dropdown = ({ title, options, otherStyles }) => {
   const selectOption = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
+    handleChange(option)
   };
 
   return (

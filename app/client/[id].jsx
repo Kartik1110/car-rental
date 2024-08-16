@@ -3,26 +3,45 @@ import { useLocalSearchParams } from "expo-router";
 import { icons } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { InfoBox, DatePicker, CustomButton } from "../../components";
+import { useEffect, useState } from "react";
+import { getClientById } from "../../lib/appwrite";
 
 const ClientSearch = () => {
   const { user, posts } = useGlobalContext();
   const { id } = useLocalSearchParams();
+  const [clientData, setClientData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const submit = async () => {
+    // Your submit logic here
+  };
 
+  useEffect(() => {
+    const fetchClientData = async () => {
+      try {
+        const data = await getClientById(id);
+        setClientData(data);
+      } catch (error) {
+        console.error("Error fetching client data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchClientData();
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <View className="w-full flex items-center justify-center px-4 bg-biege h-full">
+        <Text>Loading...</Text>
+      </View>
+    );
   }
 
   return (
     <View className="w-full flex items-center justify-center px-4 bg-biege h-full">
-      {/* <TouchableOpacity className="flex w-full items-end mb-10">
-        <Image source={icons.logout} resizeMode="contain" className="w-6 h-6" />
-      </TouchableOpacity> */}
-
-      {/* <View className="w-16 h-16 border border-secondary rounded-lg flex justify-center items-center"> */}
-        {/* <Image source={{ uri: user?.avatar }} className="w-[90%] h-[90%] rounded-lg" resizeMode="cover" /> */}
-      {/* </View> */}
-
-      <InfoBox title={user?.username} containerStyles="mt-5" titleStyles="text-4xl text-primary" />
+      <InfoBox title={clientData?.fullname} containerStyles="mt-5" titleStyles="text-4xl text-primary" />
 
       <View className="mt-5 flex flex-row">
         <InfoBox title="AED 0" subtitle="Total Charges " titleStyles="text-xl text-secondary" containerStyles="mr-10" />
@@ -32,7 +51,7 @@ const ClientSearch = () => {
       <View className="mt-5 flex flex-col items-start w-full">
         <View className="flex flex-row items-center w-full justify-between">
           <Text className="text-primary text-base font-pmedium">Car Name</Text>
-          <Text className="text-secondary-200 text-base font-pmedium">BMW M5</Text>
+          <Text className="text-secondary-200 text-base font-pmedium">{clientData?.carname || "N/A"}</Text>
         </View>
         <View className="flex flex-row items-center w-full justify-between">
           <Text className="text-primary text-base font-pmedium">Charges per day</Text>
@@ -40,21 +59,20 @@ const ClientSearch = () => {
         </View>
         <View className="flex flex-row items-center w-full justify-between">
           <Text className="text-primary text-base font-pmedium">Start Date</Text>
-          <Text className="text-secondary-200 text-base font-pmedium">10/08/2024</Text>
+          <Text className="text-secondary-200 text-base font-pmedium">"N/A"</Text>
         </View>
       </View>
 
       <DatePicker
         title="End Date"
-        // value={form.dateOfBirth}
+        value={clientData?.endDate}
         placeholder="Select end date"
-        // handleDateChange={(e) => setForm({ ...form, dateOfBirth: e })}
+        handleDateChange={(e) => setClientData({ ...clientData, endDate: e })}
         otherStyles="mt-7"
       />
       <CustomButton
         title="End Trip"
-          handlePress={submit}
-        //   isLoading={isSubmitting}
+        handlePress={submit}
         containerStyles="mt-7 min-w-[50%]"
       />
     </View>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SafeAreaView, View, FlatList, RefreshControl } from "react-native";
+import { SafeAreaView, View, FlatList, RefreshControl, Text } from "react-native";
 import { ClientCard, SearchInput, EmptyState, Loader } from "../../components";
 import useAppwrite from "../../lib/useAppwrite";
 import { getAllClients } from "../../lib/appwrite";
@@ -36,6 +36,7 @@ const Clients = () => {
         ListHeaderComponent={() => (
           <View className="flex my-6 px-4 space-y-6">
             <SearchInput placeholder={"Search for a client"} />
+            <Text className="text-2xl font-psemibold text-primary">{data.length} Clients</Text>
           </View>
         )}
         ListEmptyComponent={() => <EmptyState title="No Clients Found" subtitle="No Clients added yet" />}

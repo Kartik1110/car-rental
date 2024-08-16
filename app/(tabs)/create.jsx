@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Dimensions, ScrollView, SafeAreaView, View, Text, Alert, Image } from "react-native";
 import { CustomButton, FormField, DatePicker, Dropdown } from "../../components";
 import { createClient, getAllCars } from "../../lib/appwrite";
@@ -18,13 +18,10 @@ const Create = () => {
     issueDate: "",
     expiryDate: "",
     dateOfBirth: "",
-    // carname: "",
-    // model: "",
-    // startDate: "",
   });
   const [selectedCar, setSelectedCar] = useState({
     carname: "",
-    carnumber: "",
+    carnumber: 0,
     carid: "",
   });
 
@@ -57,6 +54,10 @@ const Create = () => {
         issuedate: form.issueDate,
         expirydate: form.expiryDate,
         dateofbirth: form.dateOfBirth,
+        carname: selectedCar.carname,
+        // fix the car id and car number issue
+        carnumber: selectedCar.carnumber,
+        carid: selectedCar.carid,
       };
       await createClient(clientData);
       Alert.alert("Success", "Client added successfully", [{ text: "OK", onPress: () => router.replace("/clients") }]);
@@ -66,6 +67,10 @@ const Create = () => {
       setSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    console.log("selectedCar", selectedCar)
+  }, [selectedCar])
 
   return (
     <SafeAreaView className="bg-biege h-full p-4">
@@ -86,7 +91,6 @@ const Create = () => {
               keyboardType: "phone-pad",
             },
             { name: "address", title: "Address", placeholder: "Enter address", keyboardType: undefined },
-            // { name: "emiratesID", title: "National ID", placeholder: "Enter National ID", keyboardType: undefined },
           ].map((field) => (
             <FormField
               key={field.name}
@@ -114,16 +118,15 @@ const Create = () => {
             otherStyles="mt-7"
           />
 
-          <View className="mt-7">
+          {/* <View className="mt-7">
             <Text className="text-base mb-3 text-primary font-pmedium">Upload a photo (optional)</Text>
             <View className="w-full h-[64px] px-4 bg-biege rounded-2xl border-2 border-black-200 flex justify-center items-center">
               <View className="w-14 h-[40px] border border-dashed border-secondary-100 flex justify-center items-center">
                 <Image source={icons.upload} resizeMode="contain" alt="upload" className="w-1/2 h-1/2" />
               </View>
             </View>
-          </View>
+          </View> */}
           {[
-            // { name: "dateOfBirth", title: "Date of Birth", placeholder: "Select date of birth" },
             { name: "issueDate", title: "Issue date", placeholder: "Select issue date" },
             { name: "expiryDate", title: "Expiry date", placeholder: "Select expiry date" },
           ].map((field) => (
@@ -140,7 +143,10 @@ const Create = () => {
             title="Select a car"
             options={carOptions}
             value={selectedCar.carname}
-            handleChange={(e) => setSelectedCar({ ...selectedCar, carname: e })}
+            handleChange={(e) => {
+              console.log(e)
+              setSelectedCar({ ...selectedCar, carname: e })
+            }}
             otherStyles="mt-7"
           />
           <CustomButton title="Add Client" handlePress={submit} containerStyles="mt-7" isLoading={isSubmitting} />
