@@ -19,7 +19,7 @@ const Clients = () => {
   }
 
   return (
-    <SafeAreaView className="bg-biege h-full mt-5">
+    <SafeAreaView className="bg-biege h-full my-10">
       <FlatList
         data={data}
         keyExtractor={(item) => item.$id}

@@ -75,7 +75,7 @@ const Create = () => {
   }, [selectedCar]);
 
   return (
-    <SafeAreaView className="bg-biege h-full p-4">
+    <SafeAreaView className="bg-biege h-full my-5 p-4">
       <ScrollView>
         <View
           style={{
@@ -85,6 +85,11 @@ const Create = () => {
           <Text className="text-2xl font-semibold text-primary mt-10 font-psemibold">
             Add a new client
           </Text>
+
+          <Text className="mt-7 text-base text-gray-500 font-pmedium text-center">
+            Hirer/Driver Information
+          </Text>
+
           {[
             {
               name: "fullName",
@@ -210,7 +215,9 @@ const Create = () => {
             ))}
           </View>
 
-          <Text className="mt-7 text-base text-primary font-pmedium text-center">Rental Information</Text>
+          <Text className="mt-7 text-base text-gray-500 font-pmedium text-center">
+            Vehicle Information
+          </Text>
 
           <Dropdown
             title="Select a car"
@@ -223,6 +230,9 @@ const Create = () => {
             otherStyles="mt-7"
           />
 
+          <Text className="mt-7 text-base text-gray-500 font-pmedium text-center">
+            Rental Information
+          </Text>
           <DatePicker
             title="Rental Date"
             value={form.rentalDate}
@@ -242,7 +252,7 @@ const Create = () => {
           <CustomButton
             title="Add Client"
             handlePress={submit}
-            containerStyles="mt-7"
+            containerStyles="my-7"
             isLoading={isSubmitting}
           />
         </View>

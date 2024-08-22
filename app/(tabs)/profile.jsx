@@ -8,7 +8,7 @@ const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
 
   return (
-    <SafeAreaView className="bg-biege h-full p-4">
+    <SafeAreaView className="bg-biege h-full mt-10">
       <ScrollView>
         <View
           className="w-full flex h-full px-4 my-6"
